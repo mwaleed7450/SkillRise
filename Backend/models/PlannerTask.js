@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const plannerTaskSchema = new mongoose.Schema(
   {
-    user:         { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    user:         { type: String, required: true },
     title:        { type: String, required: true, trim: true },
     date:         { type: Date, required: true },
     durationMins: { type: Number, default: 30 },
@@ -14,4 +14,4 @@ const plannerTaskSchema = new mongoose.Schema(
 
 plannerTaskSchema.index({ user: 1, date: 1 });
 
-export default mongoose.model('PlannerTask', plannerTaskSchema);
+export default mongoose.models.PlannerTask || mongoose.model('PlannerTask', plannerTaskSchema);

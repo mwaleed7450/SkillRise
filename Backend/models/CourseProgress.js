@@ -2,10 +2,10 @@ import mongoose from 'mongoose';
 
 const courseProgressSchema = new mongoose.Schema(
   {
-    user:        { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    user:        { type: String, required: true },
     courseTitle: { type: String, required: true, trim: true },
-    provider:    String,
-    url:         String,
+    provider:    { type: String, trim: true },
+    url:         { type: String, trim: true },
     progress:    { type: Number, min: 0, max: 100, default: 0 },
     completedAt: Date,
   },
@@ -18,4 +18,4 @@ courseProgressSchema.pre('save', function () {
   if (this.progress >= 100 && !this.completedAt) this.completedAt = new Date();
 });
 
-export default mongoose.model('CourseProgress', courseProgressSchema);
+export default mongoose.models.CourseProgress || mongoose.model('CourseProgress', courseProgressSchema);

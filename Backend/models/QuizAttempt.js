@@ -10,10 +10,9 @@ const answerSchema = new mongoose.Schema(
   { _id: false }
 );
 
-
 const quizAttemptSchema = new mongoose.Schema(
   {
-    user:       { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
+    user:       { type: String, required: true, index: true },
     topic:      { type: String, required: true, trim: true },
     difficulty: { type: String, enum: ['easy', 'medium', 'hard'], default: 'medium' },
     answers:    [answerSchema],
@@ -24,4 +23,4 @@ const quizAttemptSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('QuizAttempt', quizAttemptSchema);
+export default mongoose.models.QuizAttempt || mongoose.model('QuizAttempt', quizAttemptSchema);

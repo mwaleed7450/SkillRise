@@ -1,12 +1,12 @@
 import express from "express";
+import { protect } from "../../middleware/auth.js";
 import {
   createRoadmap,
   getRoadmaps,
   getRoadmap,
   updateStep,
   deleteRoadmap,
-} from "../controller/roadmapcontroller.js";
-import { protect } from "../middleware/auth.js";
+} from "../../controller/roadmap/add_roadmapcontroller.js";
 
 const router = express.Router();
 

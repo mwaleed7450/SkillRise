@@ -12,7 +12,7 @@ const qaSchema = new mongoose.Schema(
 
 const interviewSessionSchema = new mongoose.Schema(
   {
-    user:         { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
+    user:         { type: String, required: true, index: true },
     topic:        { type: String, required: true, trim: true },
     level:        { type: String, enum: ['beginner', 'intermediate', 'advanced'], default: 'beginner' },
     qa:           [qaSchema],
@@ -21,4 +21,4 @@ const interviewSessionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('InterviewSession', interviewSessionSchema);
+export default mongoose.models.InterviewSession || mongoose.model('InterviewSession', interviewSessionSchema);

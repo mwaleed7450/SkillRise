@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 const stepSchema = new mongoose.Schema(
   {
-    title:       { type: String, required: true },
-    description: String,
+    title:       { type: String, required: true, trim: true },
+    description: { type: String, trim: true },
     order:       { type: Number, required: true },
     completed:   { type: Boolean, default: false },
     completedAt: Date,
@@ -13,10 +13,10 @@ const stepSchema = new mongoose.Schema(
 
 const roadmapSchema = new mongoose.Schema(
   {
-    user:  { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
-    field: { type: String, required: true, trim: true },
-    title: { type: String, trim: true },
-    steps: [stepSchema],
+    user:          { type: String, required: true, index: true },
+    field:         { type: String, required: true, trim: true },
+    title:         { type: String, trim: true },
+    steps:         [stepSchema],
     generatedByAI: { type: Boolean, default: true },
   },
   { timestamps: true }
@@ -28,4 +28,4 @@ roadmapSchema.virtual('progress').get(function () {
 });
 roadmapSchema.set('toJSON', { virtuals: true });
 
-export default mongoose.model('Roadmap', roadmapSchema);
+export default mongoose.models.Roadmap || mongoose.model('Roadmap', roadmapSchema);
